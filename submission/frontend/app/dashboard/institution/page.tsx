@@ -5,40 +5,63 @@ import BackButton from "@/app/components/BackButton";
 import LogoutButton from "@/app/components/LogoutButton";
 import { useUser } from "@clerk/nextjs";
 
+/* ✅ YOUR DEPLOYED BACKEND URL */
+const BASE_URL = "https://skillbridge-backend-ocxy.onrender.com";
+
 export default function InstitutionDashboard() {
   const [batchName, setBatchName] = useState("");
   const [trainerId, setTrainerId] = useState("");
   const { user } = useUser();
 
   const createBatch = async () => {
-    const res = await fetch("http://localhost:5000/batches", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        role: "institution",
-      },
-      body: JSON.stringify({
-        name: batchName,
-        institutionId: user?.id,
-      }),
-    });
+    try {
+      if (!batchName || !trainerId) {
+        alert("Please fill all fields");
+        return;
+      }
 
-    const batch = await res.json();
-
-    // assign trainer
-    await fetch(
-      `http://localhost:5000/batches/${batch.id}/assign-trainer`,
-      {
+      /* 🔹 CREATE BATCH */
+      const res = await fetch(`${BASE_URL}/batches`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           role: "institution",
         },
-        body: JSON.stringify({ trainerId }),
-      }
-    );
+        body: JSON.stringify({
+          name: batchName,
+          institutionId: user?.id,
+        }),
+      });
 
-    alert("Batch + Trainer assigned");
+      if (!res.ok) throw new Error("Failed to create batch");
+
+      const batch = await res.json();
+
+      /* 🔹 ASSIGN TRAINER */
+      const assignRes = await fetch(
+        `${BASE_URL}/batches/${batch.id}/assign-trainer`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            role: "institution",
+          },
+          body: JSON.stringify({ trainerId }),
+        }
+      );
+
+      if (!assignRes.ok) throw new Error("Failed to assign trainer");
+
+      alert("✅ Batch created & trainer assigned");
+
+      /* ✅ Reset fields */
+      setBatchName("");
+      setTrainerId("");
+
+    } catch (err) {
+      console.error(err);
+      alert("❌ Something went wrong");
+    }
   };
 
   return (

@@ -5,6 +5,9 @@ import BackButton from "@/app/components/BackButton";
 import LogoutButton from "@/app/components/LogoutButton";
 import { useUser } from "@clerk/nextjs";
 
+/* ✅ YOUR DEPLOYED BACKEND URL */
+const BASE_URL = "https://skillbridge-backend-ocxy.onrender.com";
+
 export default function StudentDashboard() {
   const { user } = useUser();
 
@@ -23,7 +26,7 @@ export default function StudentDashboard() {
     const loadSessions = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/student/sessions/${user.id}`,
+          `${BASE_URL}/student/sessions/${user.id}`,
           {
             headers: { role: storedRole },
           }
@@ -50,7 +53,7 @@ export default function StudentDashboard() {
     try {
       setMarkingId(id);
 
-      const res = await fetch("http://localhost:5000/attendance/mark", {
+      const res = await fetch(`${BASE_URL}/attendance/mark`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +61,7 @@ export default function StudentDashboard() {
         },
         body: JSON.stringify({
           sessionId: id,
-          userId: user?.id, // ✅ FIXED
+          userId: user?.id,
         }),
       });
 

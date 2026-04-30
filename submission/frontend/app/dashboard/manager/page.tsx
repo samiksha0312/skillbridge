@@ -17,7 +17,7 @@ export default function ManagerDashboard() {
     const loadData = async () => {
       try {
         const res = await fetch(
-          "http://localhost:5000/institutions/1/summary",
+          "https://skillbridge-backend-ocxy.onrender.com/institutions/1/summary",
           {
             headers: { role: storedRole },
           }
