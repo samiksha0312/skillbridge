@@ -112,6 +112,10 @@ NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=your_key
 CLERK_SECRET_KEY=your_key 
 
 --- 
+## Live Link 
+https://skillbridge-gules-ten.vercel.app/
+
+---
 
 ## 🧠 Key Design Decisions
 Role stored in DB + localStorage
