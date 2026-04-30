@@ -1,0 +1,21 @@
+
+---
+
+# ✅ 📄 CONTACT.txt
+
+```txt
+Name: Samiksha Singh
+Email: samikshas0212@gmail.com
+
+Project: SkillBridge Assignment
+
+Tech Stack:
+- Next.js
+- Clerk Auth
+- Node.js + Express
+- PostgreSQL (Neon)
+
+Notes:
+This project demonstrates a complete role-based system with real database integration, invite flow, and protected routes.
+
+Thank you!

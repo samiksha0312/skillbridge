@@ -1,0 +1,59 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 🌌 Background */
+body {
+  background: radial-gradient(circle at top, #1e1b4b, #020617);
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+/* ✨ Glass Card */
+.glass {
+  background: rgba(248, 248, 248, 0.07);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  box-shadow: 0 0 40px rgba(99,102,241,0.25);
+}
+
+/* 🔘 Button */
+.btn {
+  background: linear-gradient(135deg, #6366f1, #8b5cf6);
+  padding: 12px;
+  border-radius: 12px;
+  width: 100%;
+  font-weight: 500;
+  transition: 0.3s;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 20px rgba(99,102,241,0.6);
+}
+
+/* ✏️ Input */
+.input {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  color: white;
+}
+
+.input::placeholder {
+  color: rgba(255,255,255,0.6);
+}
+
+.input:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 10px rgba(99,102,241,0.5);
+}
+
+/* 🧼 Only minimal Clerk override */
+.cl-card {
+  background: transparent !important;
+  box-shadow: none !important;
+}
